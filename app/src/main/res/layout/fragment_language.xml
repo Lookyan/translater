@@ -1,12 +1,47 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="wrap_content"
     android:layout_height="wrap_content" tools:context="com.lookyan.alex.translater.Language"
     >
 
+    <android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    card_view:cardCornerRadius="0dp"
+    card_view:cardBackgroundColor="@android:color/white"
+    card_view:contentPadding="5dp"
+    android:onClick="onCardClick"
+    >
 
-    <!--<Spinner-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/spinner"-->
-        <!--android:layout_below="@id/translate"/>-->
+    <EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="textCapSentences|textMultiLine"
+    android:ems="5"
+    android:id="@+id/textTranslate"
+    android:hint="@string/enter_text"
+    android:background="@android:color/transparent" />
+
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="@string/translate_button"
+        android:id="@+id/button"
+        android:layout_below="@id/card_view"
+        android:theme="@style/TranslateButtonStyle"
+        android:textColor="@android:color/white"
+        />
+
 </RelativeLayout>
+
+</ScrollView>

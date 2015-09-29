@@ -4,6 +4,7 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="translate_button">Перевести</string>
+    <string name="enter_text">Введите текст</string>
 
     <string-array name="langs_array">
         <item>албанский</item>

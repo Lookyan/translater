@@ -12,4 +12,8 @@
         <!-- -->
         <item name="android:colorAccent">#D32F2F</item>
     </style>
+
+    <style name="TranslateButtonStyle" parent="@android:style/Widget.Button">
+        <item name="colorButtonNormal">#F44336</item>
+    </style>
 </resources>
