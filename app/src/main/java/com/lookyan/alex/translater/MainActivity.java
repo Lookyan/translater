@@ -9,8 +9,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener {
@@ -48,6 +53,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         Language language = new Language();
         getFragmentManager().beginTransaction().add(R.id.frag_lang_lay, language).commit();
         getFragmentManager().beginTransaction().add(R.id.frag_tr_lay, translateArea).commit();
+
 
     }
 

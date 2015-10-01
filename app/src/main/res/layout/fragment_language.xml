@@ -36,11 +36,10 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:text="@string/translate_button"
-        android:id="@+id/button"
+        android:id="@+id/translButton"
         android:layout_below="@id/card_view"
         android:theme="@style/TranslateButtonStyle"
-        android:textColor="@android:color/white"
-        />
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>
 
