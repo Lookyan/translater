@@ -1,6 +1,6 @@
 package com.lookyan.alex.translater;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 /**
  * Created by alex on 01.10.15.
@@ -8,6 +8,6 @@ import java.util.Collection;
 public class Translation {
     public int code;
     public String lang;
-    public Collection<String> text;
+    public ArrayList<String> text;
     public String message;
 }
