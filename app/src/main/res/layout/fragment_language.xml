@@ -23,8 +23,14 @@
 
     <EditText
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:paddingLeft="15dp"
+    android:paddingTop="11dp"
+    android:paddingBottom="20dp"
+    android:paddingRight="20dp"
+    android:textSize="20dp"
     android:inputType="textCapSentences|textMultiLine"
+    android:gravity="top|start"
     android:ems="5"
     android:id="@+id/textTranslate"
     android:hint="@string/enter_text"

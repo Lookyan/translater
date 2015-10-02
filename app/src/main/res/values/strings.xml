@@ -71,4 +71,9 @@
         <item>эстонский</item>
         <item>японский</item>
     </string-array>
+    <string name="title_activity_start">Start</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_translation">TranslationActivity</string>
 </resources>

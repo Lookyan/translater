@@ -2,6 +2,7 @@ package com.lookyan.alex.translater;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,9 +10,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -26,11 +31,22 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Spinner langFromSpinner = (Spinner) findViewById(R.id.lang_from_spinner);
-        langFromSpinner.getBackground().setColorFilter(getResources().getColor(R.color.white_trian), PorterDuff.Mode.SRC_ATOP);
+        Intent intent = getIntent();
+        List<String> dirs = (ArrayList<String>) intent.getSerializableExtra("dirs");
+        Map<String, String> langs = (HashMap<String, String>) intent.getSerializableExtra("langs");
+        if(dirs != null || langs != null) {
+            LangData.setDirs(dirs);
+            LangData.setLangs(langs);
+        }
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.langs_array, R.layout.spinner_item);
+
+        Spinner langFromSpinner = (Spinner) findViewById(R.id.lang_from_spinner);
+        langFromSpinner.getBackground().setColorFilter(getResources().getColor(android.R.color.white),
+                PorterDuff.Mode.SRC_ATOP);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                R.layout.spinner_item,
+                LangData.getLangs().values().toArray(new String[LangData.getLangs().size()]));
 
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
 
@@ -40,14 +56,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
 
         Spinner langToSpinner = (Spinner) findViewById(R.id.lang_to_spinner);
-        langToSpinner.getBackground().setColorFilter(getResources().getColor(R.color.white_trian), PorterDuff.Mode.SRC_ATOP);
+        langToSpinner.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
 
         langToSpinner.setAdapter(adapter);
 
-
-        if(savedInstanceState != null) {
-            return;
-        }
 
         TranslateArea translateArea = new TranslateArea();
         Language language = new Language();
@@ -59,8 +71,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("tt", String.valueOf(id));
-        //parent.getItemAtPosition(position);
+
     }
 
     @Override

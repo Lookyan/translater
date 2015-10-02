@@ -1,12 +1,14 @@
 package com.lookyan.alex.translater;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
@@ -40,7 +42,7 @@ public class Language extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        View view = getView();
+        final View view = getView();
         if(view != null) {
             view.findViewById(R.id.translButton).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,13 +84,15 @@ public class Language extends Fragment {
 //                    });
 
                     RestAdapter restAdapter = new RestAdapter.Builder()
-                                    .setLogLevel(RestAdapter.LogLevel.FULL)
-                                    .setEndpoint(ITranslateApi.API_URL)
-                                    .build();
+                            .setLogLevel(RestAdapter.LogLevel.FULL)
+                            .setEndpoint(ITranslateApi.API_URL)
+                            .build();
 
                     ITranslateApi translateApi = restAdapter.create(ITranslateApi.class);
 
-                    translateApi.getTranslation("en-ru", "hello")
+                    String text = ((EditText) view.findViewById(R.id.textTranslate)).getText().toString();
+
+                    translateApi.getTranslation("en-ru", text)
                             .subscribeOn(Schedulers.newThread())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Subscriber<Translation>() {
@@ -104,7 +108,9 @@ public class Language extends Fragment {
 
                                 @Override
                                 public void onNext(Translation translation) {
-                                    Toast.makeText(getActivity(), "tralala", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(getActivity(), TranslationActivity.class);
+                                    intent.putExtra("transl",translation.text.get(0));
+                                    startActivity(intent);
                                 }
                             });
 
