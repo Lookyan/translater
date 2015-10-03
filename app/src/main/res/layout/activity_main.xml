@@ -12,15 +12,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/frag_lang_lay"
         android:layout_below="@id/tb">
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/frag_tr_lay"
-        android:layout_below="@id/frag_lang_lay">
-
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.lookyan.alex.translater.Language"
+            android:id="@+id/landFrag"
+            />
     </FrameLayout>
 
 </RelativeLayout>

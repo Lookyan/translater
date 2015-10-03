@@ -95,6 +95,11 @@ public class Language extends Fragment {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
     private static String getKeyFromValue(Map<String, String> hm, String value) {
         for (String o : hm.keySet()) {
             if (hm.get(o).equals(value)) {
