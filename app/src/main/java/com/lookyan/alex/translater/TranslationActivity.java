@@ -1,13 +1,12 @@
 package com.lookyan.alex.translater;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
 
 
-public class TranslationActivity extends ActionBarActivity {
+public class TranslationActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
