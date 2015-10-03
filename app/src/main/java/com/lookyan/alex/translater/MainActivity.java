@@ -7,7 +7,6 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends Activity {
 
 
     @Override
@@ -47,30 +46,15 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
         langFromSpinner.setAdapter(adapter);
 
-        langFromSpinner.setOnItemSelectedListener(this);
-
 
         Spinner langToSpinner = (Spinner) findViewById(R.id.lang_to_spinner);
         langToSpinner.getBackground().setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_ATOP);
 
         langToSpinner.setAdapter(adapter);
 
-
-        TranslateArea translateArea = new TranslateArea();
         Language language = new Language();
         getFragmentManager().beginTransaction().add(R.id.frag_lang_lay, language).commit();
-        getFragmentManager().beginTransaction().add(R.id.frag_tr_lay, translateArea).commit();
 
-
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
