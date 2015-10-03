@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import retrofit.RestAdapter;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -17,19 +18,25 @@ import rx.schedulers.Schedulers;
 public class Start extends Activity {
 
     private final static int TIMEOUT_TIME = 3;
+    private Subscription sub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setLogLevel(RestAdapter.LogLevel.FULL)
-                .setEndpoint(ITranslateApi.API_URL)
-                .build();
-        ITranslateApi translateApi = restAdapter.create(ITranslateApi.class);
+        if (RequestStore.getInstance().getLangsRequest() == null) {
 
-        translateApi.getLangs()
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setLogLevel(RestAdapter.LogLevel.FULL)
+                    .setEndpoint(ITranslateApi.API_URL)
+                    .build();
+            ITranslateApi translateApi = restAdapter.create(ITranslateApi.class);
+
+            RequestStore.getInstance().setLangsRequest(translateApi.getLangs().cache());
+        }
+
+        sub = RequestStore.getInstance().getLangsRequest()
                 .timeout(TIMEOUT_TIME, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -41,10 +48,11 @@ public class Start extends Activity {
 
                     @Override
                     public void onError(Throwable e) {
+                        RequestStore.getInstance().setLangsRequest(null);
                         AlertDialog alertDialog = new AlertDialog.Builder(Start.this).create();
                         alertDialog.setTitle(getString(R.string.error_title));
                         alertDialog.setMessage(getString(R.string.no_internet_message));
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok_word),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
@@ -56,6 +64,7 @@ public class Start extends Activity {
 
                     @Override
                     public void onNext(Langs langs) {
+                        RequestStore.getInstance().setLangsRequest(null);
                         Intent intent = new Intent(Start.this, MainActivity.class);
                         intent.putExtra("dirs", langs.getDirs());
                         intent.putExtra("langs", langs.getLangs());
@@ -63,5 +72,13 @@ public class Start extends Activity {
                         finish();
                     }
                 });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(sub != null) {
+            sub.unsubscribe();
+        }
     }
 }

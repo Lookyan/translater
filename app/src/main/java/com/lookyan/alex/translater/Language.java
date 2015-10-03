@@ -16,11 +16,14 @@ import java.util.Map;
 
 import retrofit.RestAdapter;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 
 public class Language extends Fragment {
+
+    private Subscription sub;
 
     public Language() {
     }
@@ -42,13 +45,6 @@ public class Language extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    RestAdapter restAdapter = new RestAdapter.Builder()
-                            .setLogLevel(RestAdapter.LogLevel.FULL)
-                            .setEndpoint(ITranslateApi.API_URL)
-                            .build();
-
-                    ITranslateApi translateApi = restAdapter.create(ITranslateApi.class);
-
                     String text = ((EditText) view.findViewById(R.id.textTranslate)).getText().toString();
 
                     //detect direction
@@ -59,7 +55,19 @@ public class Language extends Fragment {
                             + "-"
                             + getKeyFromValue(LangData.getLangs(), lang_to.getSelectedItem().toString());
 
-                    translateApi.getTranslation(direction, text)
+                    if (RequestStore.getInstance().getTranslationRequest() == null) {
+                        RestAdapter restAdapter = new RestAdapter.Builder()
+                                .setLogLevel(RestAdapter.LogLevel.FULL)
+                                .setEndpoint(ITranslateApi.API_URL)
+                                .build();
+
+                        ITranslateApi translateApi = restAdapter.create(ITranslateApi.class);
+                        RequestStore.getInstance().setTranslation(translateApi.getTranslation(direction, text).cache());
+                    }
+
+
+
+                    sub = RequestStore.getInstance().getTranslationRequest()
                             .subscribeOn(Schedulers.newThread())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Subscriber<Translation>() {
@@ -70,6 +78,7 @@ public class Language extends Fragment {
 
                                 @Override
                                 public void onError(Throwable e) {
+                                    RequestStore.getInstance().setTranslation(null);
                                     AlertDialog alertDialog = new AlertDialog.Builder(Language.this.getActivity()).create();
                                     alertDialog.setTitle(getString(R.string.error_title));
                                     alertDialog.setMessage(e.getMessage());
@@ -84,6 +93,7 @@ public class Language extends Fragment {
 
                                 @Override
                                 public void onNext(Translation translation) {
+                                    RequestStore.getInstance().setTranslation(null);
                                     Intent intent = new Intent(getActivity(), TranslationActivity.class);
                                     intent.putExtra("transl", translation.text.get(0));
                                     startActivity(intent);
@@ -92,6 +102,14 @@ public class Language extends Fragment {
 
                 }
             });
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(sub != null) {
+            sub.unsubscribe();
         }
     }
 
