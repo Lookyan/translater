@@ -14,20 +14,20 @@
     android:id="@+id/card_view"
     android:layout_gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
-    card_view:cardCornerRadius="0dp"
+    android:layout_height="@dimen/card_height"
+    card_view:cardCornerRadius="@dimen/card_corner_radius"
     card_view:cardBackgroundColor="@android:color/white"
-    card_view:contentPadding="5dp"
+    card_view:contentPadding="@dimen/card_content_padding"
     >
 
     <EditText
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="15dp"
-    android:paddingTop="11dp"
-    android:paddingBottom="20dp"
-    android:paddingRight="20dp"
-    android:textSize="20dp"
+    android:paddingLeft="@dimen/translation_field_padding_left"
+    android:paddingTop="@dimen/translation_field_padding_top"
+    android:paddingBottom="@dimen/translation_field_padding_bottom"
+    android:paddingRight="@dimen/translation_field_padding_right"
+    android:textSize="@dimen/translation_field_text_size"
     android:inputType="textCapSentences|textMultiLine"
     android:gravity="top|start"
     android:ems="5"
@@ -39,7 +39,7 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/translate_button_height"
         android:text="@string/translate_button"
         android:id="@+id/translButton"
         android:layout_below="@id/card_view"

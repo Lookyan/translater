@@ -3,7 +3,7 @@
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textSize="17sp"
-    android:textColor="#ffffff"
+    android:textSize="@dimen/spinner_item_text_size"
+    android:textColor="@android:color/white"
     android:ellipsize="end"
     android:singleLine="true" />

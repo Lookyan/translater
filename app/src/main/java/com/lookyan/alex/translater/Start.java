@@ -5,20 +5,18 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
 
 import retrofit.RestAdapter;
-import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 
 public class Start extends Activity {
+
+    private final static int TIMEOUT_TIME = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +30,7 @@ public class Start extends Activity {
         ITranslateApi translateApi = restAdapter.create(ITranslateApi.class);
 
         translateApi.getLangs()
-                .timeout(3, TimeUnit.SECONDS)
+                .timeout(TIMEOUT_TIME, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Langs>() {
@@ -44,8 +42,8 @@ public class Start extends Activity {
                     @Override
                     public void onError(Throwable e) {
                         AlertDialog alertDialog = new AlertDialog.Builder(Start.this).create();
-                        alertDialog.setTitle("Ошибка");
-                        alertDialog.setMessage("Нет подключения к интернету");
+                        alertDialog.setTitle(getString(R.string.error_title));
+                        alertDialog.setMessage(getString(R.string.no_internet_message));
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {

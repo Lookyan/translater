@@ -4,9 +4,6 @@ package com.lookyan.alex.translater;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by alex on 02.10.15.
- */
 public class LangData {
     private static List<String> dirs;
     private static Map<String, String> langs;

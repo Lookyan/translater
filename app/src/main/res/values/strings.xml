@@ -1,80 +1,16 @@
 <resources>
     <string name="app_name">Translater</string>
 
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="translate_button">Перевести</string>
     <string name="enter_text">Введите текст</string>
 
-    <string-array name="langs_array">
-        <item>албанский</item>
-        <item>английский</item>
-        <item>арабский</item>
-        <item>армянский</item>
-        <item>азербайджанский</item>
-        <item>африкаанс</item>
-        <item>баскский</item>
-        <item>белорусский</item>
-        <item>болгарский</item>
-        <item>боснийский</item>
-        <item>валлийский</item>
-        <item>вьетнамский</item>
-        <item>венгерский</item>
-        <item>гаитянский (креольский)</item>
-        <item>галисийский</item>
-        <item>голландский</item>
-        <item>греческий</item>
-        <item>грузинский</item>
-        <item>датский</item>
-        <item>иврит</item>
-        <item>индонезийский</item>
-        <item>ирландский</item>
-        <item>итальянский</item>
-        <item>исландский</item>
-        <item>испанский</item>
-        <item>казахский</item>
-        <item>каталанский</item>
-        <item>киргизский</item>
-        <item>китайский</item>
-        <item>корейский</item>
-        <item>латынь</item>
-        <item>латышский</item>
-        <item>литовский</item>
-        <item>малагасийский</item>
-        <item>малайский</item>
-        <item>мальтийский</item>
-        <item>македонский</item>
-        <item>монгольский</item>
-        <item>немецкий</item>
-        <item>норвежский</item>
-        <item>персидский</item>
-        <item>польский</item>
-        <item>португальский</item>
-        <item>румынский</item>
-        <item>русский</item>
-        <item>сербский</item>
-        <item>словацкий</item>
-        <item>словенский</item>
-        <item>суахили</item>
-        <item>таджикский</item>
-        <item>тайский</item>
-        <item>тагальский</item>
-        <item>татарский</item>
-        <item>турецкий</item>
-        <item>узбекский</item>
-        <item>украинский</item>
-        <item>финский</item>
-        <item>французский</item>
-        <item>хорватский</item>
-        <item>чешский</item>
-        <item>шведский</item>
-        <item>эстонский</item>
-        <item>японский</item>
-    </string-array>
-    <string name="title_activity_start">Start</string>
+    <string name="title_activity_start">Perevodchik</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_translation">TranslationActivity</string>
+    <string name="title_activity_translation">Translation</string>
     <string name="appName">Perevodchik</string>
+    <string name="error_title">Ошибка</string>
+    <string name="no_internet_message">Нет подключения к интернету</string>
+    <string name="ok_word">OK</string>
 </resources>

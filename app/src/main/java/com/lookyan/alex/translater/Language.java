@@ -71,9 +71,9 @@ public class Language extends Fragment {
                                 @Override
                                 public void onError(Throwable e) {
                                     AlertDialog alertDialog = new AlertDialog.Builder(Language.this.getActivity()).create();
-                                    alertDialog.setTitle("Ошибка");
+                                    alertDialog.setTitle(getString(R.string.error_title));
                                     alertDialog.setMessage(e.getMessage());
-                                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, Language.this.getString(R.string.ok_word),
                                             new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     dialog.dismiss();
