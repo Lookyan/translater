@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,12 @@ public class MainActivity extends Activity {
                 LangData.getLangs().values().toArray(new String[LangData.getLangs().size()]));
 
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        adapter.sort(new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                return s1.compareTo(s2);
+            }
+        });
 
         langFromSpinner.setAdapter(adapter);
 
