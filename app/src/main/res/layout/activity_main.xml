@@ -7,17 +7,12 @@
         android:id="@+id/tb"
         />
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/frag_lang_lay"
-        android:layout_below="@id/tb">
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="com.lookyan.alex.translater.Language"
-            android:id="@+id/landFrag"
-            />
-    </FrameLayout>
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.lookyan.alex.translater.Language"
+        android:id="@+id/landFrag"
+        android:layout_below="@id/tb"
+        />
 
 </RelativeLayout>
